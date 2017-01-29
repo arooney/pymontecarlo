@@ -21,7 +21,7 @@ __license__ = "GPL v3"
 # Standard library modules.
 
 # Third party modules.
-from PySide.QtGui import QWidget, QLabel, QFormLayout, QVBoxLayout
+from qtpy.QtWidgets import QWidget, QLabel, QFormLayout, QVBoxLayout
 
 # Local modules.
 

@@ -29,14 +29,14 @@ from pkg_resources import iter_entry_points
 
 def find_parse_handler(handler_name, *args, **kwargs):
     for entry_point in iter_entry_points(handler_name):
-        handler = entry_point.load()()
+        handler = entry_point.resolve()()
         if handler.can_parse(*args, **kwargs):
             return handler
     raise ValueError("No handler found for %s" % handler_name)
 
 def find_convert_handler(handler_name, *args, **kwargs):
     for entry_point in iter_entry_points(handler_name):
-        handler = entry_point.load()()
+        handler = entry_point.resolve()()
         if handler.can_convert(*args, **kwargs):
             return handler
     raise ValueError("No handler found for %s" % handler_name)

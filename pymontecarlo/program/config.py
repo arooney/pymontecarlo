@@ -95,7 +95,7 @@ class Program(object):
         for field1, field2 in fields:
             expecteds = set(getattr(converter_class, field1))
             actuals = set(map(attrgetter('CLASS'),
-                              map(methodcaller('load'),
+                              map(methodcaller('resolve'),
                                   iter_entry_points(field2))))
             missings = expecteds - actuals
             if len(missings) > 0:

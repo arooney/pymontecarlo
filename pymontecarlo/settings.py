@@ -104,7 +104,7 @@ class Settings(ConfigParser):
         """
         for handler in iter_entry_points('pymontecarlo.program'):
             if handler.name == alias:
-                program = handler.load()
+                program = handler.resolve()
 
                 if validate:
                     program.validate()
@@ -131,7 +131,7 @@ class Settings(ConfigParser):
 
         for handler in iter_entry_points('pymontecarlo.program.cli'):
             if handler.name == alias:
-                return handler.load()
+                return handler.resolve()
 
         raise ValueError('Program CLI %s not found' % alias)
 
@@ -153,7 +153,7 @@ class Settings(ConfigParser):
 
         for handler in iter_entry_points('pymontecarlo.program.gui'):
             if handler.name == alias:
-                return handler.load()
+                return handler.resolve()
 
         raise ValueError('Program GUI %s not found' % alias)
 

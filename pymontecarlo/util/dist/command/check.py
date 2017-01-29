@@ -44,7 +44,7 @@ class check(_check):
         entrypoints = set()
         for ep in iter_entry_points(group):
             try:
-                ep.load()
+                ep.resolve()
             except:
                 self.warn("Cannot open %s from %s" % (ep.name, group))
             else:
