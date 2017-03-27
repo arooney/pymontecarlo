@@ -61,47 +61,47 @@ class Program(object):
         self._importer_class = importer_class
         self._autorun = autorun
 
-        # Validate exporters
-        fields = [('BEAMS', '_beam_exporters'),
-                  ('GEOMETRIES', '_geometry_exporters'),
-                  ('DETECTORS', '_detector_exporters'),
-                  ('LIMITS', '_limit_exporters'),
-                  ('MODELS', '_model_exporters')]
-        for field1, field2 in fields:
-            exporter = exporter_class()
-            expecteds = set(getattr(converter_class, field1))
-            actuals = getattr(exporter, field2).keys()
-            missings = expecteds - actuals
-            if len(missings) > 0:
-                s = ', '.join(map(attrgetter('__name__'), missings))
-                raise ValueError("These %s cannot be exported: %s" % \
-                                 (field1.lower(), s))
-
-        # Validate importers
-        expecteds = set(self.converter_class.DETECTORS)
-        actuals = self.importer_class()._importers.keys()
-        missings = expecteds - actuals
-        if len(missings) > 0:
-            s = ', '.join(map(attrgetter('__name__'), missings))
-            raise ValueError("These %s cannot be imported: %s" % \
-                             (field1.lower(), s))
-
-        # Validate options handlers
-        fields = [('MATERIALS', 'pymontecarlo.fileformat.options.material'),
-                  ('BEAMS', 'pymontecarlo.fileformat.options.beam'),
-                  ('GEOMETRIES', 'pymontecarlo.fileformat.options.geometry'),
-                  ('DETECTORS', 'pymontecarlo.fileformat.options.detector'),
-                  ('LIMITS', 'pymontecarlo.fileformat.options.limit')]
-        for field1, field2 in fields:
-            expecteds = set(getattr(converter_class, field1))
-            actuals = set(map(attrgetter('CLASS'),
-                              map(methodcaller('resolve'),
-                                  iter_entry_points(field2))))
-            missings = expecteds - actuals
-            if len(missings) > 0:
-                s = ', '.join(map(attrgetter('__name__'), missings))
-                raise ValueError("These %s cannot be read/write: %s" % \
-                                 (field1.lower(), s))
+#        # Validate exporters
+#        fields = [('BEAMS', '_beam_exporters'),
+#                  ('GEOMETRIES', '_geometry_exporters'),
+#                  ('DETECTORS', '_detector_exporters'),
+#                  ('LIMITS', '_limit_exporters'),
+#                  ('MODELS', '_model_exporters')]
+#        for field1, field2 in fields:
+#            exporter = exporter_class()
+#            expecteds = set(getattr(converter_class, field1))
+#            actuals = getattr(exporter, field2).keys()
+#            missings = expecteds - actuals
+#            if len(missings) > 0:
+#                s = ', '.join(map(attrgetter('__name__'), missings))
+#                raise ValueError("These %s cannot be exported: %s" % \
+#                                 (field1.lower(), s))
+#
+#        # Validate importers
+#        expecteds = set(self.converter_class.DETECTORS)
+#        actuals = self.importer_class()._importers.keys()
+#        missings = expecteds - actuals
+#        if len(missings) > 0:
+#            s = ', '.join(map(attrgetter('__name__'), missings))
+#            raise ValueError("These %s cannot be imported: %s" % \
+#                             (field1.lower(), s))
+#
+#        # Validate options handlers
+#        fields = [('MATERIALS', 'pymontecarlo.fileformat.options.material'),
+#                  ('BEAMS', 'pymontecarlo.fileformat.options.beam'),
+#                  ('GEOMETRIES', 'pymontecarlo.fileformat.options.geometry'),
+#                  ('DETECTORS', 'pymontecarlo.fileformat.options.detector'),
+#                  ('LIMITS', 'pymontecarlo.fileformat.options.limit')]
+#        for field1, field2 in fields:
+#            expecteds = set(getattr(converter_class, field1))
+#            actuals = set(map(attrgetter('CLASS'),
+#                              map(methodcaller('resolve'),
+#                                  iter_entry_points(field2))))
+#            missings = expecteds - actuals
+#            if len(missings) > 0:
+#                s = ', '.join(map(attrgetter('__name__'), missings))
+#                raise ValueError("These %s cannot be read/write: %s" % \
+#                                 (field1.lower(), s))
 
     def __hash__(self):
         return hash(self.alias)
