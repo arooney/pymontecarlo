@@ -26,7 +26,7 @@ packages = find_packages(exclude=('pymontecarlo.util.dist*',))
 namespace_packages = ['pymontecarlo',
                       'pymontecarlo.program',
                       'pymontecarlo.ui']
-requirements = ['pyparsing', 'numpy==1.11.2+mkl', 'h5py==2.6.0', 'pyxray==0.1']
+requirements = ['pyparsing', 'numpy', 'h5py', 'pyxray']
 
 entry_points = {'pymontecarlo.fileformat.options.material':
                     ['Material = pymontecarlo.fileformat.options.material:MaterialXMLHandler'],
